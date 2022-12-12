@@ -10,8 +10,8 @@ L = []
 A = []
 p = pyaudio.PyAudio()
 WIDTH = 2
-#RATE = int(p.get_default_input_device_info()['defaultSampleRate'])
-#DEVICE = p.get_default_input_device_info()['index']
+RATE = int(p.get_default_input_device_info()['defaultSampleRate'])
+DEVICE = p.get_default_input_device_info()['index']
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (250,250)
@@ -19,18 +19,18 @@ fontScale = 1
 fontColor = (255,0,0)
 lineType = 2
 
-#def callback(in_data, frame_count, time_info, status):
-    #global rms
-    #rms = audioop.rms(in_data, WIDTH) / 32767
-    #return in_data, pyaudio.paContinue
+def callback(in_data, frame_count, time_info, status):
+    global rms
+    rms = audioop.rms(in_data, WIDTH) / 32767
+    return in_data, pyaudio.paContinue
 
-#stream = p.open(format=p.get_format_from_width(WIDTH),
-                #input_device_index=DEVICE,
-                #channels=1,
-                #rate=RATE,
-                #input=True,
-                #output=False,
-                #stream_callback=callback) 
+stream = p.open(format=p.get_format_from_width(WIDTH),
+                input_device_index=DEVICE,
+                channels=1,
+                rate=RATE,
+                input=True,
+                output=False,
+                stream_callback=callback) 
 
 def funct(img):
     #-----Converting image to LAB Color model----------------------------------- 
@@ -120,7 +120,7 @@ with col1:
                 FRAME_WINDOW.image(frame)
        
         video_capture.release()
-        #cv2.destroyAllWindows()
+        cv2.destroyAllWindows()
 
 
 
