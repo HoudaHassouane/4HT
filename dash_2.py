@@ -120,7 +120,7 @@ with col1:
                 FRAME_WINDOW.image(frame)
        
         video_capture.release()
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
 
 
 
